@@ -1,4 +1,4 @@
-# Service Desk Intelligence Dashboard
+# Service Desk Dashboard
 
 A dashboard that turns service desk ticket data into actionable insight: volume and backlog trends, SLA health, recurring issues, and team workload.
 
@@ -48,7 +48,7 @@ Ticket data can contain personal information and internal system details. Use sy
 
 ## Related work
 
-- [Splunk Brute Force Detection Lab](https://github.com/khancam15/splunk-bruteforce-detection-lab): detection and case note automation
+- [Splunk Brute Force Detection Lab](https://github.com/khancam15/ssplunk-bruteforce-detection-lab): detection and case note automation
 - [Multi-Agent Commerce Pipeline](https://github.com/khancam15/multi-agent-commerce-pipeline): agent orchestration with publish gates
 
 ## License
