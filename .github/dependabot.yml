@@ -1,0 +1,14 @@
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+    groups:
+      actions:
+        patterns: ["*"]
+  # Enable once the app stack is committed:
+  # - package-ecosystem: pip   # or npm
+  #   directory: /
+  #   schedule:
+  #     interval: weekly
