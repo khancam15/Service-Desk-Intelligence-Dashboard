@@ -26,7 +26,7 @@ git clone https://github.com/khancam15/Service-Desk-Intelligence-Dashboard.git
 cd Service-Desk-Intelligence-Dashboard
 python -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt -e ".[dev]"
-streamlit run src/service_desk_dashboard/app.py
+streamlit run streamlit_app.py
 ```
 
 Open http://localhost:8501. With no configuration the app generates 120 days of synthetic tickets.
@@ -35,7 +35,7 @@ To use your own (anonymised) export, shape it as described in [docs/data-model.m
 
 ```bash
 cp .env.example .env   # optional; never commit .env
-TICKETS_CSV=data/private/tickets.csv streamlit run src/service_desk_dashboard/app.py
+TICKETS_CSV=data/private/tickets.csv streamlit run streamlit_app.py
 ```
 
 To write a synthetic dataset to disk:
@@ -56,6 +56,7 @@ See [docs/deployment.md](docs/deployment.md) for hosting options and what to put
 ## Project layout
 
 ```
+streamlit_app.py  entry point (used by Streamlit Community Cloud)
 src/service_desk_dashboard/
   model.py      data model: columns, allowed values, SLA targets
   generate.py   synthetic ticket generator (also the sdd-generate command)

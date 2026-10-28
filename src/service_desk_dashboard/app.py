@@ -1,6 +1,6 @@
 """Streamlit dashboard.
 
-Run with:  streamlit run src/service_desk_dashboard/app.py
+Run with:  streamlit run streamlit_app.py  (or this file directly)
 """
 
 from __future__ import annotations
@@ -21,8 +21,6 @@ METRICS_DOC = (
     "https://github.com/khancam15/Service-Desk-Intelligence-Dashboard/blob/main/docs/metrics.md"
 )
 PRIORITY_COLORS = {"P1": "#c0392b", "P2": "#e67e22", "P3": "#2e86c1", "P4": "#7f8c8d"}
-
-st.set_page_config(page_title="Service Desk Intelligence", page_icon="📊", layout="wide")
 
 
 @st.cache_data(show_spinner="Loading tickets...")
@@ -218,6 +216,7 @@ def workload_tab(df: pd.DataFrame, as_of: pd.Timestamp) -> None:
 
 
 def main() -> None:
+    st.set_page_config(page_title="Service Desk Intelligence", page_icon="📊", layout="wide")
     df, as_of, source = load_data()
     st.title("Service Desk Intelligence")
     st.caption(
@@ -242,4 +241,5 @@ def main() -> None:
         workload_tab(selection, as_of)
 
 
-main()
+if __name__ == "__main__":
+    main()
