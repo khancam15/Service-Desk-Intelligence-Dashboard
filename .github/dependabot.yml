@@ -7,8 +7,15 @@ updates:
     groups:
       actions:
         patterns: ["*"]
-  # Enable once the app stack is committed:
-  # - package-ecosystem: pip   # or npm
-  #   directory: /
-  #   schedule:
-  #     interval: weekly
+  - package-ecosystem: pip
+    directory: /
+    schedule:
+      interval: weekly
+    groups:
+      python:
+        patterns: ["*"]
+        update-types: [minor, patch]
+  - package-ecosystem: docker
+    directory: /
+    schedule:
+      interval: weekly
