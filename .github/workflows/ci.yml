@@ -99,7 +99,21 @@ jobs:
           else
             echo "No dependency manifests changed; skipping review."
           fi
-      - uses: actions/dependency-review-action@a1d282b36b6f3519aa1f3fc636f609c47dddb294 # v5.0.0
+      # Dependency review needs the repository's Dependency graph setting. When it is
+      # off, warn on the run instead of failing every dependency PR; Dependabot and
+      # CodeQL still cover the dependencies.
+      - name: Check Dependency graph is enabled
+        id: graph
         if: steps.deps.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if gh api "repos/${GITHUB_REPOSITORY}/dependency-graph/sbom" --silent 2>/dev/null; then
+            echo "enabled=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "::warning title=Dependency review skipped::Dependency graph is disabled. Enable it in Settings > Code security to review dependency changes."
+          fi
+      - uses: actions/dependency-review-action@a1d282b36b6f3519aa1f3fc636f609c47dddb294 # v5.0.0
+        if: steps.deps.outputs.changed == 'true' && steps.graph.outputs.enabled == 'true'
         with:
           fail-on-severity: high
