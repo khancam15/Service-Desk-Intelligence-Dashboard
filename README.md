@@ -51,6 +51,8 @@ docker build -t service-desk-dashboard .
 docker run --rm -p 8501:8501 service-desk-dashboard
 ```
 
+For a written weekly brief on these figures (what changed, what is at risk, what to do next), see the [Insights Analyst](docs/insights.md).
+
 See [docs/deployment.md](docs/deployment.md) for hosting options and what to put in place before showing real data.
 
 ## Project layout
@@ -63,8 +65,9 @@ src/service_desk_dashboard/
   data.py       CSV loading and validation
   metrics.py    metric calculations, one function per dashboard view
   app.py        Streamlit dashboard
+  insights.py   Insights Analyst: weekly Claude-written brief (also the sdd-insights command)
 tests/          unit tests for each module and app smoke tests
-docs/           data model, metric definitions, deployment
+docs/           data model, metric definitions, deployment, insights analyst
 ```
 
 Run the checks locally with `ruff check . && ruff format --check . && pytest`.
