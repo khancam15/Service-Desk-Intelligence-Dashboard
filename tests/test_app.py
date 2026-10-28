@@ -31,3 +31,16 @@ def test_app_reports_bad_csv(monkeypatch, tmp_path):
     at = AppTest.from_file(APP, default_timeout=60).run()
     assert not at.exception
     assert "Missing required columns" in at.error[0].value
+
+
+def test_root_entry_point_runs(monkeypatch):
+    monkeypatch.delenv("TICKETS_CSV", raising=False)
+    monkeypatch.setenv("SYNTHETIC_DAYS", "30")
+    entry = str(Path(__file__).parents[1] / "streamlit_app.py")
+    at = AppTest.from_file(entry, default_timeout=60).run()
+    assert not at.exception
+    assert len(at.metric) == 8
+    # A rerun (any widget interaction) must render the page again.
+    at.run()
+    assert not at.exception
+    assert len(at.metric) == 8
